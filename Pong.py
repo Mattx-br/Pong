@@ -31,7 +31,7 @@ paddle_a.shapesize(
     stretch_wid=5, stretch_len=1
 )  # stretch takes the default size and multiple by the given value, in this case 5 and 1
 paddle_a.penup()
-paddle_a.goto(-390, 0)
+paddle_a.goto(-380, 0)
 
 
 # Paddle B
@@ -45,7 +45,7 @@ paddle_b.shapesize(
     stretch_wid=5, stretch_len=1
 )  # stretch takes the default size and multiple by the given value, in this case 5 and 1
 paddle_b.penup()
-paddle_b.goto(380, 0)
+paddle_b.goto(370, 0)
 
 
 # Ball
@@ -57,8 +57,8 @@ ball.color("white")
 # by default the size is 20x20 px
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 0.1  # d = delta(change/variation) | x axis
-ball.dy = -0.1
+ball.dx = 0.2  # d = delta(change/variation) | x axis
+ball.dy = 0.2
 
 # *** Components of the game
 
@@ -69,25 +69,25 @@ ball.dy = -0.1
 
 def paddle_a_up():
     y = paddle_a.ycor()
-    y += 20
+    y += 25
     paddle_a.sety(y)
 
 
 def paddle_a_down():
     y = paddle_a.ycor()
-    y -= 20
+    y -= 25
     paddle_a.sety(y)
 
 
 def paddle_b_up():
     y = paddle_b.ycor()
-    y += 20
+    y += 25
     paddle_b.sety(y)
 
 
 def paddle_b_down():
     y = paddle_b.ycor()
-    y -= 20
+    y -= 25
     paddle_b.sety(y)
 
 
@@ -114,6 +114,8 @@ while True:
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
 
+
+
     # Border checking
     if ball.ycor() > 290:
         ball.sety(290)
@@ -131,4 +133,14 @@ while True:
         ball.goto(0, 0)
         ball.dx *= -1
 
+    # Paddle and ball colisions
+    # for paddle_a
+    if (ball.xcor() > 350 and ball.xcor() < 360) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
+        ball.setx(350)
+        ball.dx *= -1
     
+    
+    # for paddle_b
+    if (ball.xcor() < -360 and ball.xcor() > -370) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
+        ball.setx(-360)
+        ball.dx *= -1
