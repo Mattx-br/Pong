@@ -11,6 +11,8 @@ wn.bgcolor("black") # Background color
 wn.setup(width=800, height=600)  # Size 
 wn.tracer(0) # Stop window from updating, so with it disabled, we have to manually update the screen. Now we can speed up the game
 
+'''=============================================================='''
+
 # Components of the game
 
 # Paddle A
@@ -25,7 +27,7 @@ paddle_a.shapesize(stretch_wid=5, stretch_len=1) # stretch takes the default siz
 paddle_a.penup()
 paddle_a.goto(-390, 0)
 
-'''=============================================================='''
+
 
 # Paddle B
 paddle_b = turtle.Turtle()
@@ -38,7 +40,7 @@ paddle_b.shapesize(stretch_wid=5, stretch_len=1) # stretch takes the default siz
 paddle_b.penup()
 paddle_b.goto(380, 0)
 
-'''=============================================================='''
+
 
 # Ball
 ball = turtle.Turtle()
@@ -61,7 +63,31 @@ def paddle_a_up():
     y += 20
     paddle_a.sety(y)
 
+def paddle_a_down():
+    y = paddle_a.ycor()
+    y -= 20
+    paddle_a.sety(y)
+
+def paddle_b_up():
+    y = paddle_b.ycor()
+    y += 20
+    paddle_b.sety(y)
+
+def paddle_b_down():
+    y = paddle_b.ycor()
+    y -= 20
+    paddle_b.sety(y)
+
 '''=============================================================='''
+
+# Keyboard binding
+
+wn.listen() # listen for keyboard inputs
+wn.onkeypress(paddle_a_up, 'w')
+wn.onkeypress(paddle_a_down, 's')
+wn.onkeypress(paddle_b_up, 'Up')
+wn.onkeypress(paddle_b_down, 'Down')
+
 
 
 
